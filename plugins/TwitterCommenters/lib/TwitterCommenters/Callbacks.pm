@@ -81,10 +81,11 @@ sub _get_client {
 	my $config = $plugin->get_config_hash('system');
 	my $consumer_key = $config->{twitter_consumer_key} || MT->config('TwitterOAuthConsumerKey');
 	my $consumer_secret = $config->{twitter_consumer_secret} || MT->config('TwitterOAuthConsumerSecret');
-	use Net::Twitter::Lite;
-	my $client = Net::Twitter::Lite->new(
+	use Net::Twitter::Lite::WithAPIv1_1;
+	my $client = Net::Twitter::Lite::WithAPIv1_1->new(
 		consumer_key    => $consumer_key,
 		consumer_secret => $consumer_secret,
+		ssl             => 1,
 	);
 	return $client;
 }
